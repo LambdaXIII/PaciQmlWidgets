@@ -16,16 +16,34 @@ Item {
     property color color: "black"
     property real radius: 0
     property real backgroundOpacity: 0.5
+    property string message
 
     Text {
         id: titleText
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.top: parent.top
+        height: parent.height
         anchors.leftMargin: root.titleLeftSpace + root.radius
         horizontalAlignment: Qt.AlignLeft
         verticalAlignment: Qt.AlignVCenter
         color: "white"
         text: root.title
+        width: parent.width / 2
         z: 1
+    }
+
+    Text {
+        id: messageText
+        anchors.right: parent.right
+        anchors.top: parent.top
+        height: parent.height
+        anchors.rightMargin: root.titleLeftSpace + root.radius
+        horizontalAlignment: Qt.AlignRight
+        verticalAlignment: Qt.AlignVCenter
+        color: "grey"
+        width: parent.width / 2
+        z: 2
+        text: root.message
     }
 
     Rectangle {

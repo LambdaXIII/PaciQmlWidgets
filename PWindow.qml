@@ -14,41 +14,46 @@ Window {
     property point offsetP: Qt.point(0, 0)
     property bool isMoving: false
 
+    property string message
+
     Rectangle {
         id: backgroundRect
         anchors.fill: parent
         color: root.windowColor
         radius: root.windowRound
         clip: true
+        z: -9999
+    }
 
-        PTitleBar {
-            id: titleBar
-            titleLeftSpace: backgroundRect.radius
-            title: root.title
-            radius: root.windowRound
+    PTitleBar {
+        id: titleBar
+        titleLeftSpace: backgroundRect.radius
+        title: root.title
+        radius: root.windowRound
+        message: root.message
+        z: 9999
 
-            MouseArea {
-                anchors.fill: parent
-                onPressed: {
-                    cursorShape = Qt.DragMoveCursor
-                    startP = Qt.point(mouseX, mouseY)
-                    isMoving = true
+        MouseArea {
+            anchors.fill: parent
+            onPressed: {
+                cursorShape = Qt.DragMoveCursor
+                startP = Qt.point(mouseX, mouseY)
+                isMoving = true
+            }
+
+            onPositionChanged: {
+
+                if (root.isMoving) {
+                    root.offsetP = Qt.point(mouseX - root.startP.x,
+                                            mouseY - root.startP.y)
+
+                    root.x = root.x + root.offsetP.x
+                    root.y = root.y + root.offsetP.y
                 }
-
-                onPositionChanged: {
-
-                    if (root.isMoving) {
-                        root.offsetP = Qt.point(mouseX - root.startP.x,
-                                                mouseY - root.startP.y)
-
-                        root.x = root.x + root.offsetP.x
-                        root.y = root.y + root.offsetP.y
-                    }
-                }
-                onReleased: {
-                    cursorShape = Qt.ArrowCursor
-                    isMoving = false
-                }
+            }
+            onReleased: {
+                cursorShape = Qt.ArrowCursor
+                isMoving = false
             }
         }
     }
