@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>PTitleBar.qml</file>
+        <file>PWindow.qml</file>
+        <file>TestRect.qml</file>
+    </qresource>
+</RCC>
