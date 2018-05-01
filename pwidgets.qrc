@@ -3,5 +3,7 @@
         <file>PTitleBar.qml</file>
         <file>PWindow.qml</file>
         <file>TestRect.qml</file>
+        <file>PButton.qml</file>
+        <file>PBaseButton.qml</file>
     </qresource>
 </RCC>
