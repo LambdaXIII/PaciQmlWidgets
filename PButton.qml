@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
-import Paci.UI 1.0
 import QtGraphicalEffects 1.0
 
 PBaseButton {
@@ -10,7 +9,6 @@ PBaseButton {
     property color releasedColor: "darkgrey"
 
     onPressed: root.state = "PRESSED"
-
     onReleased: root.state = "RELEASED"
 
     states: [
@@ -19,6 +17,7 @@ PBaseButton {
             PropertyChanges {
                 target: root
                 backgroundColor: root.pressedColor
+                shadowOffset: 3
             }
         },
         State {
@@ -26,6 +25,7 @@ PBaseButton {
             PropertyChanges {
                 target: root
                 backgroundColor: root.releasedColor
+                shadowOffset: 5
             }
         }
     ]

@@ -44,6 +44,25 @@ Item {
         width: parent.width / 2
         z: 2
         text: root.message
+
+        SequentialAnimation on color {
+            id: messageTextColorAnimation
+            ColorAnimation {
+                from: "grey"
+                to: "yellow"
+                duration: 50
+            }
+            ColorAnimation {
+                from: "yellow"
+                to: "grey"
+                duration: 600
+            }
+        }
+
+        onTextChanged: {
+            messageTextColorAnimation.complete()
+            messageTextColorAnimation.start()
+        }
     }
 
     Rectangle {

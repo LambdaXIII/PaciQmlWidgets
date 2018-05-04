@@ -35,14 +35,14 @@ Window {
 
         MouseArea {
             anchors.fill: parent
+            cursorShape: Qt.OpenHandCursor
             onPressed: {
-                cursorShape = Qt.DragMoveCursor
+                cursorShape = Qt.ClosedHandCursor
                 startP = Qt.point(mouseX, mouseY)
                 isMoving = true
             }
 
             onPositionChanged: {
-
                 if (root.isMoving) {
                     root.offsetP = Qt.point(mouseX - root.startP.x,
                                             mouseY - root.startP.y)
@@ -52,7 +52,7 @@ Window {
                 }
             }
             onReleased: {
-                cursorShape = Qt.ArrowCursor
+                cursorShape = Qt.OpenHandCursor
                 isMoving = false
             }
         }
