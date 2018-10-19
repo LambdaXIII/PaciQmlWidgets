@@ -5,5 +5,6 @@
         <file>TestRect.qml</file>
         <file>PButton.qml</file>
         <file>PBaseButton.qml</file>
+        <file>PMessagePopup.qml</file>
     </qresource>
 </RCC>

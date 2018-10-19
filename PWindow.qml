@@ -10,11 +10,11 @@ Window {
     property real windowRound: 10
     property color windowColor: "white"
 
-    property point startP: Qt.point(0, 0)
-    property point offsetP: Qt.point(0, 0)
-    property bool isMoving: false
+    property alias message: titleBar.message
 
-    property string message
+    Loader {
+        id: messagePopupLoader
+    }
 
     Rectangle {
         id: backgroundRect
@@ -30,31 +30,20 @@ Window {
         titleLeftSpace: backgroundRect.radius
         title: root.title
         radius: root.windowRound
-        message: root.message
         z: 9999
 
-        MouseArea {
-            anchors.fill: parent
-            cursorShape: Qt.OpenHandCursor
-            onPressed: {
-                cursorShape = Qt.ClosedHandCursor
-                startP = Qt.point(mouseX, mouseY)
-                isMoving = true
+        onWindowMove: {
+            root.x = root.x + offsetX
+            root.y = root.y + offsetY
+        }
+        onMessagePopupRequested: {
+            if (messagePopupLoader.status == Loader.Null) {
+                messagePopupLoader.source = "PMessagePopup.qml"
             }
-
-            onPositionChanged: {
-                if (root.isMoving) {
-                    root.offsetP = Qt.point(mouseX - root.startP.x,
-                                            mouseY - root.startP.y)
-
-                    root.x = root.x + root.offsetP.x
-                    root.y = root.y + root.offsetP.y
-                }
-            }
-            onReleased: {
-                cursorShape = Qt.OpenHandCursor
-                isMoving = false
-            }
+            messagePopupLoader.item.message = root.message
+            messagePopupLoader.item.x = (root.width - messagePopupLoader.item.width) / 2
+            messagePopupLoader.item.y = (root.height - messagePopupLoader.item.height) / 2
+            messagePopupLoader.item.open()
         }
     }
 }
